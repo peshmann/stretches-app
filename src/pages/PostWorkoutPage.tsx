@@ -53,7 +53,7 @@ export default function PostWorkoutPage() {
   const allCompleted = state.exercisesSkipped === 0;
 
   function handleDone() {
-    if (!selectedFeeling) return;
+    if (!selectedFeeling || !state) return;
     completeWorkout({
       workoutId: state.workoutId,
       date: new Date().toISOString(),
