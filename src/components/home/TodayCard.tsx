@@ -47,7 +47,7 @@ export function TodayCard({ workout, activeSession, completedToday, onStart, onR
           </div>
           <Button size="lg" onClick={onResume}>Resume Workout</Button>
           <button
-            className="text-text-muted text-sm hover:text-text transition-colors"
+            className="text-text-muted text-sm hover:text-text transition-colors min-h-[48px]"
             onClick={() => onStart(workout.id)}
           >
             Start Fresh

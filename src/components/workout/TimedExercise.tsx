@@ -118,7 +118,7 @@ export function TimedExercise({ exercise, currentSet, totalSets, onSetComplete, 
             trackColor="stroke-white/10"
           >
             <div className="flex flex-col items-center">
-              <span className="font-display text-4xl font-bold tabular-nums">
+              <span className="font-display text-5xl font-bold tabular-nums">
                 {timerState === 'idle' ? formatTime(duration) : formatTime(timer.secondsLeft)}
               </span>
               {timerState === 'paused' && (

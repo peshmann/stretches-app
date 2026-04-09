@@ -45,22 +45,21 @@ export function RecentWorkouts({ workouts }: RecentWorkoutsProps) {
           key={`${w.workoutId}-${w.date}`}
           className="animate-fade-in-up"
           animate={false}
+          style={{ animationDelay: `${index * 50}ms`, opacity: 0 }}
         >
-          <div style={{ animationDelay: `${index * 50}ms` }} className="animate-fade-in-up">
-            <div className="flex items-start justify-between gap-2">
-              <div className="min-w-0 flex-1">
-                <p className="text-xs text-text-muted">{formatDate(w.date)}</p>
-                <p className="font-medium truncate">{getWorkoutName(w.workoutId)}</p>
-                {w.notes && (
-                  <p className="text-xs text-text-muted mt-1">
-                    {w.notes.length > 60 ? `${w.notes.slice(0, 60)}...` : w.notes}
-                  </p>
-                )}
-              </div>
-              <span className={`text-xs px-2 py-0.5 rounded-full whitespace-nowrap ${feelingColors[w.feeling]}`}>
-                {w.feeling}
-              </span>
+          <div className="flex items-start justify-between gap-2">
+            <div className="min-w-0 flex-1">
+              <p className="text-xs text-text-muted">{formatDate(w.date)}</p>
+              <p className="font-medium truncate">{getWorkoutName(w.workoutId)}</p>
+              {w.notes && (
+                <p className="text-xs text-text-muted mt-1">
+                  {w.notes.length > 60 ? `${w.notes.slice(0, 60)}...` : w.notes}
+                </p>
+              )}
             </div>
+            <span className={`text-xs px-2 py-0.5 rounded-full whitespace-nowrap ${feelingColors[w.feeling]}`}>
+              {w.feeling}
+            </span>
           </div>
         </Card>
       ))}

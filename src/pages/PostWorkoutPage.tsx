@@ -96,7 +96,7 @@ export default function PostWorkoutPage() {
               key={f.value}
               type="button"
               onClick={() => setSelectedFeeling(f.value)}
-              className={`rounded-xl border p-3 text-center font-semibold text-sm transition-all duration-200 active:scale-95
+              className={`rounded-xl border min-h-[48px] p-3 text-center font-semibold text-sm transition-all duration-200 active:scale-95
                 ${selectedFeeling === f.value ? f.selectedColor : f.color}`}
             >
               {f.label}

@@ -51,7 +51,7 @@ function PhaseSection({ title, exercises, indexOffset }: PhaseProps) {
             <div
               key={exercise.id}
               className="flex items-center justify-between py-2 px-3 rounded-lg bg-white/[0.03] animate-fade-in-up"
-              style={{ animationDelay: `${globalIndex * 50}ms` }}
+              style={{ animationDelay: `${globalIndex * 50}ms`, opacity: 0 }}
             >
               <div className="flex items-center gap-2 min-w-0 flex-1">
                 <span className="text-sm text-text truncate">{exercise.name}</span>

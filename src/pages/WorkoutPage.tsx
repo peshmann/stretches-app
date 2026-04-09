@@ -151,7 +151,7 @@ export default function WorkoutPage() {
         <div className="max-w-lg mx-auto flex items-center justify-between px-4 py-3">
           <button
             onClick={() => setShowExitConfirm(true)}
-            className="flex items-center gap-1 text-text-muted hover:text-text transition-colors text-sm"
+            className="flex items-center gap-1 text-text-muted hover:text-text transition-colors text-sm min-h-[48px]"
           >
             <span>&larr;</span> Exit
           </button>

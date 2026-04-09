@@ -21,7 +21,7 @@ export function RepExercise({ exercise, currentSet, totalSets, onSetComplete }: 
       )}
 
       <div className="flex flex-col items-center gap-1">
-        <span className="font-display text-4xl font-bold">{reps} reps</span>
+        <span className="font-display text-5xl font-bold">{reps} reps</span>
         {isBilateral && (
           <span className="text-sm text-text-muted">each side</span>
         )}

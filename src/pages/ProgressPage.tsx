@@ -18,8 +18,8 @@ export default function ProgressPage() {
   const pct = total > 0 ? Math.round((completed / total) * 100) : 0;
 
   return (
-    <div className="space-y-4">
-      <h1 className="font-display text-2xl font-bold pt-6 pb-4">Progress</h1>
+    <div className="pt-6 pb-4 space-y-4">
+      <h1 className="font-display text-2xl font-bold">Progress</h1>
 
       {/* Streak */}
       <StreakCard
