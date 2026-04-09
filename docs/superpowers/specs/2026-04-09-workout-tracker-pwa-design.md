@@ -92,7 +92,7 @@ No backend. No accounts. No cloud sync. Workout data is static JSON bundled at b
 - Streak card: Current streak with fire animation, weekly progress (e.g. "4/6 this week")
 - Today's workout card: Large, prominent, shows workout name + estimated duration + "Start" button
 - Quick access: 3 smaller cards for Session A, Session B, Daily Stretching
-- "Log Activity" button: for non-guided days (e.g. badminton Saturday) — marks the day as active for streak purposes
+- "Log Activity" button: shown only on days without a scheduled gym workout (Saturday/Sunday) — marks the day as active for streak purposes
 - Bottom nav: Home (active) | Library | Progress
 
 **Behaviour**:
@@ -125,7 +125,14 @@ No backend. No accounts. No cloud sync. Workout data is static JSON bundled at b
 - Safety warning: orange banner if exercise has one (e.g. "Don't go below parallel")
 - Video link button
 - Timer/action area (bottom half — see Timer System below)
+- Pause button: visible during active timers, freezes countdown, tap to resume
 - Navigation: "Skip Exercise" (subtle) at very bottom
+
+**Interactions:**
+- **Skip exercise**: shows confirmation dialog ("Skip Doorway Chest Stretch?") before skipping. Prevents accidental skips with sweaty/gloved hands.
+- **Exit workout**: always shows confirmation ("Exit workout? Your progress so far will be saved."). Saves current position so user can resume later.
+- **Resume workout**: if a previous workout was interrupted, Home screen shows "Resume Session A (5/12 exercises done)" instead of "Start". Tapping resumes from where they left off. A "Start Fresh" option is also available.
+- **Pause timer**: freezes countdown. Screen shows "Paused" overlay. Tap anywhere or tap resume button to continue.
 
 **Exercise flow varies by type:**
 
@@ -279,6 +286,24 @@ interface CompletedWorkout {
   notes?: string;
 }
 ```
+
+### Interrupted Workout State
+
+**Key: `workout-tracker-active-session`**
+```typescript
+interface ActiveSession {
+  workoutId: string;
+  startedAt: string;           // ISO datetime
+  currentExerciseIndex: number; // position in flattened exercise list
+  currentSet: number;
+  exercisesCompleted: number;
+  exercisesSkipped: number;
+  skippedExerciseIds: string[];
+  elapsedSeconds: number;
+}
+```
+
+Saved to LocalStorage on every exercise/set transition. Cleared on workout completion or when user chooses "Start Fresh". If present when app opens, Home screen shows resume prompt.
 
 ### Streak Calculation
 - A "streak day" = any day with at least one completed workout
