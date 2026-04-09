@@ -51,15 +51,16 @@ export function TimedExercise({ exercise, currentSet, totalSets, onSetComplete, 
   }, [exercise.id, currentSet]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Handle the switching state: wait 3s then auto-start right side
+  const timerStart = timer.start;
   useEffect(() => {
     if (timerState !== 'switching') return;
     const timeout = setTimeout(() => {
       setCurrentSide('right');
       setTimerState('running');
-      timer.start(duration);
+      timerStart(duration);
     }, 3000);
     return () => clearTimeout(timeout);
-  }, [timerState, duration, timer]);
+  }, [timerState, duration, timerStart]);
 
   const handleStart = () => {
     if (!audioUnlockedRef.current) {

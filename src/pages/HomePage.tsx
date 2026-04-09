@@ -35,7 +35,7 @@ export default function HomePage() {
 
   const handleResume = () => {
     if (session) {
-      navigate(`/workout/${session.workoutId}`);
+      navigate(`/workout/${session.workoutId}`, { state: { resume: true } });
     }
   };
 
