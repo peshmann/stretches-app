@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage';
 import LibraryPage from './pages/LibraryPage';
 import WorkoutPage from './pages/WorkoutPage';
 import PostWorkoutPage from './pages/PostWorkoutPage';
+import ProgressPage from './pages/ProgressPage';
 
 export default function App() {
   const location = useLocation();
@@ -15,7 +16,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/library" element={<LibraryPage />} />
-          <Route path="/progress" element={<div className="pt-6 font-display text-2xl font-bold">Progress</div>} />
+          <Route path="/progress" element={<ProgressPage />} />
           <Route path="/workout/:workoutId" element={<WorkoutPage />} />
           <Route path="/post-workout" element={<PostWorkoutPage />} />
         </Routes>
