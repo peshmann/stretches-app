@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Card } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
 import { workouts, userProfile } from '../data/workouts';
+import { exerciseGifs } from '../data/exerciseGifs';
 import type { Workout, Exercise } from '../data/types';
 
 function formatDuration(seconds: number): string {
@@ -54,6 +55,14 @@ function PhaseSection({ title, exercises, indexOffset }: PhaseProps) {
               style={{ animationDelay: `${globalIndex * 50}ms`, opacity: 0 }}
             >
               <div className="flex items-center gap-2 min-w-0 flex-1">
+                {exerciseGifs[exercise.id] && (
+                  <img
+                    src={exerciseGifs[exercise.id]}
+                    alt=""
+                    className="w-12 h-12 rounded object-cover flex-shrink-0"
+                    loading="lazy"
+                  />
+                )}
                 <span className="text-sm text-text truncate">{exercise.name}</span>
                 {exercise.priority === 'critical' && (
                   <span className="shrink-0 w-2 h-2 rounded-full bg-accent" />

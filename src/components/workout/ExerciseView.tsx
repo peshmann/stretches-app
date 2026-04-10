@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import type { Exercise, WorkoutStep } from '../../data/types';
 import { SafetyBanner } from './SafetyBanner';
+import { exerciseGifs } from '../../data/exerciseGifs';
 
 interface ExerciseViewProps {
   exercise: Exercise;
@@ -19,6 +21,9 @@ const priorityStyles: Record<string, string> = {
 };
 
 export function ExerciseView({ exercise, phase }: ExerciseViewProps) {
+  const [showGif, setShowGif] = useState(true);
+  const gifUrl = exerciseGifs[exercise.id];
+
   return (
     <div className="flex flex-col gap-4">
       <div>
@@ -39,6 +44,27 @@ export function ExerciseView({ exercise, phase }: ExerciseViewProps) {
           )}
         </div>
       </div>
+
+      {gifUrl && (
+        <>
+          <button
+            onClick={() => setShowGif(!showGif)}
+            className="flex items-center gap-1.5 text-sm text-primary hover:text-primary-glow transition-colors mb-0"
+          >
+            {showGif ? '\u25BC Hide Demo' : '\u25B6 Show Demo'}
+          </button>
+          {showGif && (
+            <div className="relative rounded-xl overflow-hidden bg-black/20 mb-0">
+              <img
+                src={gifUrl}
+                alt={`${exercise.name} demonstration`}
+                className="w-full max-h-[250px] object-contain"
+                loading="lazy"
+              />
+            </div>
+          )}
+        </>
+      )}
 
       <p className="text-text-muted text-sm leading-relaxed">{exercise.description}</p>
 
