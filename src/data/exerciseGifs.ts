@@ -28,23 +28,23 @@ export const exerciseGifs: Record<string, string> = {
   'lat-stretch': 'https://media.tenor.com/FiZeFtVl7TYAAAAC/side-stretch-side-bend.gif',
   'wall-angels': 'https://media.tenor.com/t1f260YWlIsAAAAC/gifsraoul-workout.gif',
 
-  // --- IMPROVED MATCHES (manually picked from search results) ---
+  // --- IMPROVED MATCHES (manually picked from refined searches) ---
   'kneeling-hip-flexor': 'https://media.tenor.com/7AiXqxQT0dsAAAAC/lunging-leg-lunge.gif',
   'hip-flexor-priority': 'https://media.tenor.com/7AiXqxQT0dsAAAAC/lunging-leg-lunge.gif',
   'neck-stretches': 'https://media.tenor.com/wpQ1C-E09q0AAAAC/head-drop-neck-exercise.gif',
   'hamstring-stretch': 'https://media.tenor.com/tclORraR32UAAAAC/hand-to-toe-extended-stretch.gif',
   'foam-roll-lats': 'https://media.tenor.com/1UcstMh5uAUAAAAC/warming-up-stretching.gif',
   'side-plank': 'https://media.tenor.com/ohdQMV-9SrkAAAAC/pamela-pamela-reif.gif',
+  'foam-roll-thoracic': 'https://media.tenor.com/1UcstMh5uAUAAAAC/warming-up-stretching.gif',
+  'thread-the-needle': 'https://media.tenor.com/G6UOVsD9bs4AAAAC/workout-working-out.gif',
+  'thread-the-needle-priority': 'https://media.tenor.com/G6UOVsD9bs4AAAAC/workout-working-out.gif',
+  'band-pull-aparts': 'https://media.tenor.com/IrYw1RzccdoAAAAC/resistance-bands-workout.gif',
+  'deep-neck-flexor': 'https://media.tenor.com/BDuua5AFAh8AAAAC/head-strong-neck-ups.gif',
+  'thoracic-extension': 'https://media.tenor.com/FdSmFsLOItMAAAAC/back-extension-exercise.gif',
 
-  // --- MISSING: No good GIF match found. User should source these manually. ---
-  // 'foam-roll-thoracic': '',      // Foam Roll - Thoracic Spine
-  // 'foam-roll-hip-flexors': '',   // Foam Roll - Hip Flexors
-  // 'deep-neck-flexor': '',        // Deep Neck Flexor Activation (chin tucks)
-  // 'doorway-chest-stretch': '',   // Doorway Chest Stretch
+  // --- MISSING: No good GIF match found (4 exercises). User can source manually. ---
+  // 'foam-roll-hip-flexors': '',   // Foam Roll - Hip Flexors (too niche for Tenor)
+  // 'doorway-chest-stretch': '',   // Doorway Chest Stretch (too specific)
   // 'doorway-chest-priority': '',  // Doorway Chest Stretch (daily)
-  // 'thoracic-extension': '',      // Thoracic Extension on Foam Roller
-  // 'band-pull-aparts': '',        // Resistance Band Pull-Aparts
-  // 'pallof-press': '',            // Cable Pallof Press
-  // 'thread-the-needle': '',       // Thread the Needle stretch
-  // 'thread-the-needle-priority': '',  // Thread the Needle (daily)
+  // 'pallof-press': '',            // Cable Pallof Press (too niche)
 };
