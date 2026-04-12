@@ -38,7 +38,7 @@ export default defineConfig({
             options: { cacheName: 'gstatic-fonts-cache', expiration: { maxEntries: 10, maxAgeSeconds: 60 * 60 * 24 * 365 } },
           },
           {
-            urlPattern: /^https:\/\/media\.tenor\.com\/.*/i,
+            urlPattern: /^https:\/\/(media\.tenor\.com|i\.makeagif\.com|static\.exercisedb\.dev)\/.*/i,
             handler: 'CacheFirst',
             options: {
               cacheName: 'exercise-gifs-cache',
