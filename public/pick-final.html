@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Final GIF Pick</title>
+  <style>
+    body { font-family: system-ui; background: #0a0e17; color: #e8ecf4; padding: 20px; max-width: 1000px; margin: 0 auto; }
+    h1 { color: #3b82f6; }
+    .ex { border: 1px solid #1f2937; border-radius: 12px; padding: 16px; margin-bottom: 24px; background: #111827; }
+    .name { font-size: 20px; font-weight: bold; }
+    .desc { color: #9ca3af; font-size: 14px; margin: 4px 0 12px; }
+    .opts { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+    .opt { border: 2px solid #1f2937; border-radius: 8px; padding: 8px; cursor: pointer; }
+    .opt:hover { border-color: #3b82f6; }
+    .opt.sel { border-color: #22c55e; background: #22c55e10; }
+    .opt img { width: 100%; border-radius: 4px; background: #000; min-height: 100px; }
+    .lbl { font-size: 11px; color: #9ca3af; margin-top: 4px; }
+    .none { border: 2px dashed #ef4444; border-radius: 8px; padding: 20px; cursor: pointer; text-align: center; color: #ef4444; }
+    .none.sel { background: #ef444420; }
+    #top { position: sticky; top: 0; background: #0a0e17; padding: 12px 0; border-bottom: 1px solid #1f2937; z-index: 10; }
+    #out { font-family: monospace; font-size: 12px; white-space: pre-wrap; background: #1f2937; padding: 12px; border-radius: 8px; margin-top: 20px; display: none; }
+    button { padding: 10px 20px; border-radius: 8px; border: none; cursor: pointer; background: #3b82f6; color: #fff; }
+    p { color: #9ca3af; margin: 4px 0; }
+  </style>
+</head>
+<body>
+  <div id="top">
+    <h1>Final Round — Last 7 Exercises</h1>
+    <p>Pick best match or "None". <span id="c">0</span>/7</p>
+    <button onclick="go()">Generate Result</button>
+  </div>
+  <div id="list"></div>
+  <div id="out"></div>
+  <script>
+    const E=[
+      {id:'kneeling-hip-flexor',name:'Hip Flexor Stretch (Kneeling)',desc:'Kneel on one knee in lunge, push hips forward to stretch front of hip',opts:[
+        {url:'https://i.makeagif.com/media/6-03-2014/xjfID0.gif',lbl:'Hip flexor stretch (DailyBurn/MakeAGif)'},
+      ]},
+      {id:'band-pull-aparts',name:'Band Pull-Aparts',desc:'Hold resistance band at chest with straight arms, pull apart squeezing shoulder blades',opts:[
+        {url:'https://i.makeagif.com/media/2-26-2018/mAf82b.gif',lbl:'Band Pull Aparts (MakeAGif)'},
+      ]},
+      {id:'seated-spinal-twist',name:'Seated Spinal Twist',desc:'Sit cross-legged on floor, hand on opposite knee, gently twist torso to one side',opts:[
+        {url:'https://static.exercisedb.dev/media/6sYyrRX.gif',lbl:'Bent knee lying twist (ExerciseDB) — lying version, not seated'},
+      ]},
+      {id:'deep-neck-flexor',name:'Deep Neck Flexor / Chin Tuck',desc:'Lie on back, gently tuck chin to chest (making double chin) without lifting head, hold 5s',opts:[
+        {url:'https://static.exercisedb.dev/media/isAAZWA.gif',lbl:'Side-to-side chin (ExerciseDB)'},
+        {url:'https://i.makeagif.com/media/11-08-2023/whDGb-.gif',lbl:'Chin tuck posture (MakeAGif)'},
+      ]},
+      {id:'thoracic-extension',name:'Thoracic Extension (Foam Roller)',desc:'Foam roller under shoulder blades, hands behind head, arch/extend back over the roller',opts:[
+        {url:'https://static.exercisedb.dev/media/DIVyqrU.gif',lbl:'Sphinx pose (ExerciseDB) — similar back extension, no roller'},
+        {url:'https://static.exercisedb.dev/media/O3INw8V.gif',lbl:'Improved Sphinx (ExerciseDB)'},
+        {url:'https://static.exercisedb.dev/media/GSDioYu.gif',lbl:'Upper back stretch (ExerciseDB)'},
+      ]},
+      {id:'foam-roll-thoracic',name:'Foam Roll — Thoracic Spine',desc:'Foam roller under mid-back, arms crossed over chest, roll up and down 6-8 inches',opts:[
+        {url:'https://static.exercisedb.dev/media/isofgzg.gif',lbl:'Roller back stretch (ExerciseDB)'},
+        {url:'https://media.tenor.com/vH2_CMwXtNIAAAAC/qroller.gif',lbl:'Q-Roller self massage (Tenor)'},
+      ]},
+      {id:'hip-flexor-priority',name:'Kneeling Hip Flexor Stretch (daily)',desc:'Same as above — kneeling lunge, push hips forward',opts:[
+        {url:'https://i.makeagif.com/media/6-03-2014/xjfID0.gif',lbl:'Hip flexor stretch (DailyBurn/MakeAGif)'},
+      ]},
+    ];
+    const P={};let n=0;const L=document.getElementById('list');
+    E.forEach(e=>{const d=document.createElement('div');d.className='ex';let h=`<div class="name">${e.name}</div><div class="desc"><b>Should show:</b> ${e.desc}</div><div class="opts">`;
+    e.opts.forEach((o,i)=>{h+=`<div class="opt" id="o-${e.id}-${i}" onclick="pk('${e.id}',${i},'${o.url.replace(/'/g,"\\'")}')"><img src="${o.url}" loading="lazy"><div class="lbl">${o.lbl}</div></div>`;});
+    h+=`<div class="none" id="n-${e.id}" onclick="no('${e.id}')">✗ None match</div></div>`;d.innerHTML=h;L.appendChild(d);});
+    function pk(id,i,u){if(!(id in P))n++;P[id]=u;document.querySelectorAll(`[id^="o-${id}-"]`).forEach(e=>e.className='opt');document.getElementById(`n-${id}`).className='none';document.getElementById(`o-${id}-${i}`).className='opt sel';document.getElementById('c').textContent=n;}
+    function no(id){if(!(id in P))n++;P[id]='NONE';document.querySelectorAll(`[id^="o-${id}-"]`).forEach(e=>e.className='opt');document.getElementById(`n-${id}`).className='none sel';document.getElementById('c').textContent=n;}
+    function go(){document.getElementById('out').textContent='FINAL PICKS:\n\n'+E.map(e=>e.id+': '+(P[e.id]||'NOT REVIEWED')).join('\n');document.getElementById('out').style.display='block';document.getElementById('out').scrollIntoView();}
+  </script>
+</body>
+</html>
