@@ -15,7 +15,7 @@ function toDateStr(d: Date): string {
 export default function HomePage() {
   const navigate = useNavigate();
   const { progress, logActivity } = useProgress();
-  const { session, startSession } = useActiveSession();
+  const { session, startSession, endSession } = useActiveSession();
 
   const todayWorkout = getTodayPrimaryWorkout();
   const todayStr = toDateStr(new Date());
@@ -74,6 +74,7 @@ export default function HomePage() {
         completedToday={completedToday}
         onStart={handleStart}
         onResume={handleResume}
+        onClear={endSession}
       />
 
       <div className="flex flex-col gap-3">

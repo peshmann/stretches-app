@@ -35,9 +35,11 @@ interface PhaseProps {
   title: string;
   exercises: Exercise[];
   indexOffset: number;
+  expandedExerciseId: string | null;
+  onExerciseTap: (id: string) => void;
 }
 
-function PhaseSection({ title, exercises, indexOffset }: PhaseProps) {
+function PhaseSection({ title, exercises, indexOffset, expandedExerciseId, onExerciseTap }: PhaseProps) {
   if (exercises.length === 0) return null;
 
   return (
@@ -48,60 +50,118 @@ function PhaseSection({ title, exercises, indexOffset }: PhaseProps) {
       <div className="space-y-1">
         {exercises.map((exercise, i) => {
           const globalIndex = indexOffset + i;
+          const gifUrl = exerciseGifs[exercise.id];
+          const isDetailOpen = expandedExerciseId === exercise.id;
           return (
             <div
               key={exercise.id}
-              className="flex items-center justify-between py-2 px-3 rounded-lg bg-white/[0.03] animate-fade-in-up"
+              className="rounded-lg bg-white/[0.03] animate-fade-in-up"
               style={{ animationDelay: `${globalIndex * 50}ms`, opacity: 0 }}
             >
-              <div className="flex items-center gap-2 min-w-0 flex-1">
-                {exerciseGifs[exercise.id] && (
-                  <img
-                    src={exerciseGifs[exercise.id]}
-                    alt=""
-                    className="w-12 h-12 rounded object-cover flex-shrink-0"
-                    loading="lazy"
-                  />
-                )}
-                <span className="text-sm text-text truncate">{exercise.name}</span>
-                {exercise.priority === 'critical' && (
-                  <span className="shrink-0 w-2 h-2 rounded-full bg-accent" />
-                )}
-                {exercise.priority === 'high' && (
-                  <span className="shrink-0 w-2 h-2 rounded-full bg-primary" />
-                )}
-              </div>
-              <div className="flex items-center gap-2 shrink-0 ml-2">
-                {exercise.type === 'timed' ? (
-                  <span className="text-xs text-text-muted">
-                    <svg className="inline w-3 h-3 mr-0.5 -mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <circle cx="12" cy="12" r="10" />
-                      <path d="M12 6v6l4 2" />
-                    </svg>
-                    {formatExerciseInfo(exercise)}
-                  </span>
-                ) : (
-                  <span className="text-xs text-text-muted">
-                    <span className="inline-block px-1 py-0.5 rounded bg-white/10 text-[10px] font-medium mr-1">reps</span>
-                    {formatExerciseInfo(exercise)}
-                  </span>
-                )}
-                {exercise.videoUrl && (
-                  <a
-                    href={exercise.videoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-text-muted hover:text-primary transition-colors"
-                    onClick={(e) => e.stopPropagation()}
-                    aria-label={`Watch video for ${exercise.name}`}
+              <div
+                className="flex items-center justify-between py-2 px-3 cursor-pointer"
+                onClick={() => onExerciseTap(exercise.id)}
+              >
+                <div className="flex items-center gap-2 min-w-0 flex-1">
+                  {gifUrl && (
+                    <img
+                      src={gifUrl}
+                      alt=""
+                      className="w-12 h-12 rounded object-cover flex-shrink-0"
+                      loading="lazy"
+                    />
+                  )}
+                  <span className="text-sm text-text truncate">{exercise.name}</span>
+                  {exercise.priority === 'critical' && (
+                    <span className="shrink-0 w-2 h-2 rounded-full bg-accent" />
+                  )}
+                  {exercise.priority === 'high' && (
+                    <span className="shrink-0 w-2 h-2 rounded-full bg-primary" />
+                  )}
+                </div>
+                <div className="flex items-center gap-2 shrink-0 ml-2">
+                  {exercise.type === 'timed' ? (
+                    <span className="text-xs text-text-muted">
+                      <svg className="inline w-3 h-3 mr-0.5 -mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M12 6v6l4 2" />
+                      </svg>
+                      {formatExerciseInfo(exercise)}
+                    </span>
+                  ) : (
+                    <span className="text-xs text-text-muted">
+                      <span className="inline-block px-1 py-0.5 rounded bg-white/10 text-[10px] font-medium mr-1">reps</span>
+                      {formatExerciseInfo(exercise)}
+                    </span>
+                  )}
+                  <svg
+                    className={`w-3.5 h-3.5 text-text-muted transition-transform duration-200 ${isDetailOpen ? 'rotate-180' : ''}`}
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
                   >
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                      <path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  </a>
-                )}
+                    <path d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
               </div>
+
+              {/* Expanded exercise detail */}
+              {isDetailOpen && (
+                <div className="px-3 pb-3 pt-1 border-t border-white/5 space-y-3">
+                  {gifUrl && (
+                    <img
+                      src={gifUrl}
+                      alt={`${exercise.name} demonstration`}
+                      className="w-full max-w-xs rounded-lg mx-auto"
+                      loading="lazy"
+                    />
+                  )}
+                  {exercise.description && (
+                    <p className="text-sm text-text-muted">{exercise.description}</p>
+                  )}
+                  {exercise.tips && (
+                    <div>
+                      <span className="text-xs font-semibold uppercase tracking-wider text-text-muted">Tips</span>
+                      <p className="text-sm text-text-muted mt-0.5">{exercise.tips}</p>
+                    </div>
+                  )}
+                  {exercise.safety && (
+                    <div className="rounded-lg bg-warning/10 border border-warning/20 p-2">
+                      <span className="text-xs font-semibold text-warning">Safety</span>
+                      <p className="text-xs text-warning/80 mt-0.5">{exercise.safety}</p>
+                    </div>
+                  )}
+                  <div className="flex items-center gap-2 flex-wrap">
+                    {exercise.priority && (
+                      <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${
+                        exercise.priority === 'critical'
+                          ? 'bg-accent/20 text-accent'
+                          : exercise.priority === 'high'
+                            ? 'bg-primary/20 text-primary'
+                            : 'bg-white/10 text-text-muted'
+                      }`}>
+                        {exercise.priority}
+                      </span>
+                    )}
+                    {exercise.videoUrl && (
+                      <a
+                        href={exercise.videoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-xs font-medium text-primary hover:text-primary/80 transition-colors"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                          <path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                          <path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        Watch Video
+                      </a>
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
           );
         })}
@@ -112,10 +172,16 @@ function PhaseSection({ title, exercises, indexOffset }: PhaseProps) {
 
 export default function LibraryPage() {
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [expandedExerciseId, setExpandedExerciseId] = useState<string | null>(null);
   const navigate = useNavigate();
 
   function handleCardClick(workoutId: string) {
     setExpandedId((prev) => (prev === workoutId ? null : workoutId));
+    setExpandedExerciseId(null);
+  }
+
+  function handleExerciseTap(exerciseId: string) {
+    setExpandedExerciseId((prev) => (prev === exerciseId ? null : exerciseId));
   }
 
   return (
@@ -209,16 +275,22 @@ export default function LibraryPage() {
                   title="Pre-Workout"
                   exercises={workout.preWorkout}
                   indexOffset={0}
+                  expandedExerciseId={expandedExerciseId}
+                  onExerciseTap={handleExerciseTap}
                 />
                 <PhaseSection
                   title="Main Workout"
                   exercises={workout.mainWorkout}
                   indexOffset={workout.preWorkout.length}
+                  expandedExerciseId={expandedExerciseId}
+                  onExerciseTap={handleExerciseTap}
                 />
                 <PhaseSection
                   title="Cool-Down"
                   exercises={workout.coolDown}
                   indexOffset={workout.preWorkout.length + workout.mainWorkout.length}
+                  expandedExerciseId={expandedExerciseId}
+                  onExerciseTap={handleExerciseTap}
                 />
 
                 <div className="mt-6">

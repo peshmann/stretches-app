@@ -9,13 +9,14 @@ interface TodayCardProps {
   completedToday: boolean;
   onStart: (workoutId: string) => void;
   onResume: () => void;
+  onClear: () => void;
 }
 
 function getTotalExercises(workout: Workout): number {
   return workout.preWorkout.length + workout.mainWorkout.length + workout.coolDown.length;
 }
 
-export function TodayCard({ workout, activeSession, completedToday, onStart, onResume }: TodayCardProps) {
+export function TodayCard({ workout, activeSession, completedToday, onStart, onResume, onClear }: TodayCardProps) {
   // Completed state
   if (completedToday && workout) {
     return (
@@ -46,12 +47,21 @@ export function TodayCard({ workout, activeSession, completedToday, onStart, onR
             </p>
           </div>
           <Button size="lg" onClick={onResume}>Resume Workout</Button>
-          <button
-            className="text-text-muted text-sm hover:text-text transition-colors min-h-[48px]"
-            onClick={() => onStart(workout.id)}
-          >
-            Start Fresh
-          </button>
+          <div className="flex items-center justify-center gap-4">
+            <button
+              className="text-text-muted text-sm hover:text-text transition-colors min-h-[48px]"
+              onClick={() => onStart(workout.id)}
+            >
+              Start Fresh
+            </button>
+            <span className="text-text-muted/30">|</span>
+            <button
+              className="text-text-muted text-sm hover:text-danger transition-colors min-h-[48px]"
+              onClick={onClear}
+            >
+              Clear Saved Progress
+            </button>
+          </div>
         </div>
       </Card>
     );
