@@ -21,8 +21,8 @@ export const exerciseGifs: Record<string, string> = {
   'goblet-squat': 'https://static.exercisedb.dev/media/yn8yg1r.gif',
 
   // Stretches (ExerciseDB)
-  'doorway-chest-stretch': 'https://static.exercisedb.dev/media/3uj0Ozg.gif',
-  'doorway-chest-priority': 'https://static.exercisedb.dev/media/3uj0Ozg.gif',
+  'doorway-chest-stretch': 'https://static.exercisedb.dev/media/chfnQnM.gif', // back pec stretch (bodyweight)
+  'doorway-chest-priority': 'https://static.exercisedb.dev/media/chfnQnM.gif',
   'kneeling-hip-flexor': 'https://static.exercisedb.dev/media/tFGKm99.gif',
   'hip-flexor-priority': 'https://static.exercisedb.dev/media/tFGKm99.gif',
   'foam-roll-hip-flexors': 'https://static.exercisedb.dev/media/tFGKm99.gif',
@@ -30,7 +30,7 @@ export const exerciseGifs: Record<string, string> = {
   'figure-4-stretch': 'https://static.exercisedb.dev/media/QY39eBr.gif',
   'hamstring-stretch': 'https://static.exercisedb.dev/media/99rWm7w.gif',
   'lat-stretch': 'https://static.exercisedb.dev/media/f38OEuO.gif',
-  'seated-spinal-twist': 'https://static.exercisedb.dev/media/UEjSrKI.gif',
+  'seated-spinal-twist': 'https://static.exercisedb.dev/media/2jl9K55.gif', // spine twist (bodyweight)
 
   // Cardio
   'light-cardio-a': 'https://static.exercisedb.dev/media/rjiM4L3.gif',
@@ -42,7 +42,7 @@ export const exerciseGifs: Record<string, string> = {
   'single-leg-glute-bridge': 'https://media.tenor.com/6e9R6ktpmjQAAAAC/single-leg-butt-bridge.gif',
   'childs-pose': 'https://media.tenor.com/aSrCPRHv8aEAAAAC/childs-pose-yoga-pose.gif',
   'childs-pose-priority': 'https://media.tenor.com/aSrCPRHv8aEAAAAC/childs-pose-yoga-pose.gif',
-  'reverse-lunges': 'https://media.tenor.com/fWiC9Ze5eUMAAAAC/lunges-exercise.gif',
+  'reverse-lunges': 'https://static.exercisedb.dev/media/SSsBDwB.gif', // dumbbell rear lunge
   'clamshells': 'https://media.tenor.com/6I8f5HYyIq0AAAAC/clam-exercise.gif',
 
   // ═══ MISSING — no reliable GIF match found ═══
