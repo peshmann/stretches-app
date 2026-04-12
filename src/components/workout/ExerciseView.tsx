@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import type { Exercise, WorkoutStep } from '../../data/types';
 import { exerciseGifs } from '../../data/exerciseGifs';
 
@@ -15,64 +14,44 @@ const phaseLabels: Record<WorkoutStep['phase'], string> = {
 };
 
 export function ExerciseView({ exercise, phase, compact = false }: ExerciseViewProps) {
-  const [showInfo, setShowInfo] = useState(false);
   const gifUrl = exerciseGifs[exercise.id];
 
   if (compact) {
     return (
-      <div className="flex flex-col items-center text-center gap-2">
-        <span className="text-[10px] font-semibold uppercase tracking-wider text-text-muted">
-          {phaseLabels[phase]}
-        </span>
-        <h2 className="font-display text-xl font-bold leading-tight">{exercise.name}</h2>
-
-        {exercise.sides === 2 && (
-          <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-success/20 text-success">
-            Each side
-          </span>
-        )}
-
+      <div className="flex gap-3 items-start">
+        {/* GIF thumbnail */}
         {gifUrl && (
-          <div className="rounded-xl overflow-hidden bg-black/20 w-full max-w-[200px]">
+          <div className="shrink-0 rounded-lg overflow-hidden bg-black/20 w-20 h-20">
             <img
               src={gifUrl}
-              alt={`${exercise.name} demonstration`}
-              className="w-full max-h-[140px] object-contain"
+              alt=""
+              className="w-full h-full object-cover"
               loading="lazy"
             />
           </div>
         )}
 
-        <button
-          onClick={() => setShowInfo(!showInfo)}
-          className="text-xs text-primary hover:text-primary-glow transition-colors"
-        >
-          {showInfo ? 'Hide details' : 'Show details'}
-        </button>
-
-        {showInfo && (
-          <div className="text-left w-full space-y-2 bg-surface rounded-lg p-3 text-xs max-h-[120px] overflow-y-auto">
-            <p className="text-text-muted">{exercise.description}</p>
-            {exercise.tips && (
-              <p className="text-primary/80">Tip: {exercise.tips}</p>
-            )}
-            {exercise.videoUrl && (
-              <a
-                href={exercise.videoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-primary hover:text-primary-glow"
-              >
-                Watch video
-              </a>
-            )}
-          </div>
-        )}
+        {/* Text content */}
+        <div className="flex-1 min-w-0">
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-text-muted">
+            {phaseLabels[phase]}
+          </span>
+          <h2 className="font-display text-lg font-bold leading-tight">{exercise.name}</h2>
+          {exercise.sides === 2 && (
+            <span className="text-[10px] font-semibold text-success">Each side</span>
+          )}
+          <p className="text-xs text-text-muted leading-snug mt-1 line-clamp-2">{exercise.description}</p>
+          {exercise.tips && (
+            <p className="text-[11px] text-primary/70 leading-snug mt-1 line-clamp-1">
+              Tip: {exercise.tips}
+            </p>
+          )}
+        </div>
       </div>
     );
   }
 
-  // Full view (used in Library detail expand)
+  // Full view (Library detail expand)
   return (
     <div className="flex flex-col gap-3">
       <div>

@@ -87,25 +87,25 @@ export function TimedExercise({ exercise, currentSet, totalSets, onSetComplete, 
     : null;
 
   return (
-    <div className="flex flex-col items-center gap-6 py-4">
+    <div className="flex flex-col items-center gap-3">
       {totalSets > 1 && (
-        <span className="font-display text-lg text-text-muted">
+        <span className="font-display text-sm text-text-muted">
           Set {currentSet} of {totalSets}
         </span>
       )}
 
       {sideLabel && timerState !== 'switching' && (
-        <span className="text-sm font-semibold uppercase tracking-wider text-primary">
+        <span className="text-xs font-semibold uppercase tracking-wider text-primary">
           {sideLabel}
         </span>
       )}
 
       {timerState === 'switching' ? (
-        <div className="flex flex-col items-center gap-4 py-8">
-          <ProgressRing progress={1} size={200} strokeWidth={8} color="stroke-primary" trackColor="stroke-white/10">
-            <span className="font-display text-lg font-bold text-primary">Switch</span>
+        <div className="flex flex-col items-center gap-3">
+          <ProgressRing progress={1} size={120} strokeWidth={6} color="stroke-primary" trackColor="stroke-white/10">
+            <span className="font-display text-sm font-bold text-primary">Switch</span>
           </ProgressRing>
-          <p className="font-display text-xl font-bold text-primary animate-pulse">
+          <p className="font-display text-lg font-bold text-primary animate-pulse">
             Switch to Right Side
           </p>
         </div>
@@ -113,35 +113,35 @@ export function TimedExercise({ exercise, currentSet, totalSets, onSetComplete, 
         <>
           <ProgressRing
             progress={timerState === 'idle' ? 0 : timer.progress}
-            size={200}
-            strokeWidth={8}
+            size={120}
+            strokeWidth={6}
             color="stroke-primary"
             trackColor="stroke-white/10"
           >
             <div className="flex flex-col items-center">
-              <span className="font-display text-5xl font-bold tabular-nums">
+              <span className="font-display text-3xl font-bold tabular-nums">
                 {timerState === 'idle' ? formatTime(duration) : formatTime(timer.secondsLeft)}
               </span>
               {timerState === 'paused' && (
-                <span className="text-xs uppercase tracking-wider text-text-muted mt-1">Paused</span>
+                <span className="text-[10px] uppercase tracking-wider text-text-muted">Paused</span>
               )}
             </div>
           </ProgressRing>
 
           {timerState === 'idle' && (
-            <Button variant="primary" size="lg" onClick={handleStart}>
+            <Button variant="primary" size="md" onClick={handleStart}>
               Start Timer
             </Button>
           )}
 
           {timerState === 'running' && (
-            <Button variant="ghost" size="lg" onClick={handlePause}>
+            <Button variant="ghost" size="md" onClick={handlePause}>
               Pause
             </Button>
           )}
 
           {timerState === 'paused' && (
-            <Button variant="primary" size="lg" onClick={handleResume}>
+            <Button variant="primary" size="md" onClick={handleResume}>
               Resume
             </Button>
           )}

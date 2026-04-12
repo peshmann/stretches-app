@@ -213,13 +213,13 @@ export default function WorkoutPage() {
             slideDirection === 'forward' ? 'animate-slide-in' : 'animate-slide-in-reverse'
           }`}
         >
-          {/* Top: exercise info */}
+          {/* Top: exercise info + GIF + description */}
           <div className="shrink-0">
             <ExerciseView exercise={currentStep.exercise} phase={currentStep.phase} compact />
           </div>
 
           {/* Middle: timer or rep action */}
-          <div className="flex-1 min-h-0 flex flex-col items-center justify-center py-2">
+          <div className="flex-1 min-h-0 flex flex-col items-center justify-center">
             {currentStep.exercise.type === 'timed' ? (
               <TimedExercise
                 exercise={currentStep.exercise}
