@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import type { Exercise, WorkoutStep } from '../../data/types';
-import { SafetyBanner } from './SafetyBanner';
 import { exerciseGifs } from '../../data/exerciseGifs';
 
 interface ExerciseViewProps {
@@ -75,7 +74,6 @@ export function ExerciseView({ exercise, phase }: ExerciseViewProps) {
         </div>
       )}
 
-      {exercise.safety && <SafetyBanner message={exercise.safety} />}
 
       {exercise.videoUrl && (
         <a

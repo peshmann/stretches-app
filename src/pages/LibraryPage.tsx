@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
-import { workouts, userProfile } from '../data/workouts';
+import { workouts } from '../data/workouts';
 import { exerciseGifs } from '../data/exerciseGifs';
 import type { Workout, Exercise } from '../data/types';
 
@@ -25,10 +25,6 @@ function formatExerciseInfo(exercise: Exercise): string {
 
 function getExerciseCount(workout: Workout): number {
   return workout.preWorkout.length + workout.mainWorkout.length + workout.coolDown.length;
-}
-
-function getSafetyCount(workout: Workout): number {
-  return workout.safetyWarnings.length;
 }
 
 interface PhaseProps {
@@ -126,12 +122,6 @@ function PhaseSection({ title, exercises, indexOffset, expandedExerciseId, onExe
                       <p className="text-sm text-text-muted mt-0.5">{exercise.tips}</p>
                     </div>
                   )}
-                  {exercise.safety && (
-                    <div className="rounded-lg bg-warning/10 border border-warning/20 p-2">
-                      <span className="text-xs font-semibold text-warning">Safety</span>
-                      <p className="text-xs text-warning/80 mt-0.5">{exercise.safety}</p>
-                    </div>
-                  )}
                   <div className="flex items-center gap-2 flex-wrap">
                     {exercise.priority && (
                       <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${
@@ -191,7 +181,6 @@ export default function LibraryPage() {
       {workouts.map((workout) => {
         const isExpanded = expandedId === workout.id;
         const exerciseCount = getExerciseCount(workout);
-        const safetyCount = getSafetyCount(workout);
         const isGym = workout.type === 'gym';
 
         return (
@@ -217,11 +206,6 @@ export default function LibraryPage() {
                 <div className="flex items-center gap-3 mt-1 text-sm text-text-muted">
                   <span>{exerciseCount} exercises</span>
                   <span>~{workout.estimatedDuration} min</span>
-                  {safetyCount > 0 && (
-                    <span className="text-xs font-medium px-1.5 py-0.5 rounded bg-warning/20 text-warning">
-                      {safetyCount} warning{safetyCount > 1 ? 's' : ''}
-                    </span>
-                  )}
                 </div>
               </div>
               <svg
@@ -240,36 +224,6 @@ export default function LibraryPage() {
             {/* Expanded content */}
             {isExpanded && (
               <div className="mt-4 border-t border-white/5 pt-4">
-                {/* Safety warnings */}
-                {workout.safetyWarnings.length > 0 && (
-                  <div className="rounded-lg bg-warning/10 border border-warning/20 p-3 mb-4">
-                    <h3 className="text-sm font-semibold text-warning mb-1">Safety Warnings</h3>
-                    <ul className="space-y-1">
-                      {workout.safetyWarnings.map((warning, i) => (
-                        <li key={i} className="text-xs text-warning/80 flex gap-2">
-                          <span className="shrink-0">--</span>
-                          <span>{warning}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-
-                {/* User restrictions */}
-                {userProfile.restrictions.length > 0 && (
-                  <div className="rounded-lg bg-danger/10 border border-danger/20 p-3 mb-4">
-                    <h3 className="text-sm font-semibold text-danger mb-1">Your Restrictions</h3>
-                    <ul className="space-y-1">
-                      {userProfile.restrictions.map((restriction, i) => (
-                        <li key={i} className="text-xs text-danger/80 flex gap-2">
-                          <span className="shrink-0">--</span>
-                          <span>{restriction}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-
                 {/* Exercise phases */}
                 <PhaseSection
                   title="Pre-Workout"

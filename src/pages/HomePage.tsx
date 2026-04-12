@@ -58,7 +58,7 @@ export default function HomePage() {
     : null;
 
   return (
-    <div className="pt-6 pb-4 flex flex-col gap-4">
+    <div className="pt-4 pb-4 flex flex-col gap-3">
       <h1 className="font-display text-2xl font-bold">Workout Tracker</h1>
 
       <StreakCard
