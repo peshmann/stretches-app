@@ -50,6 +50,10 @@ export const exerciseGifs: Record<string, string> = {
   'hip-flexor-priority': 'https://i.makeagif.com/media/6-03-2014/xjfID0.gif',
   'band-pull-aparts': 'https://i.makeagif.com/media/2-26-2018/mAf82b.gif',
 
-  // ═══ No match found (4 exercises) — text + YouTube link only ═══
-  // seated-spinal-twist, deep-neck-flexor, thoracic-extension, foam-roll-thoracic
+  // ═══ Spotebi (fitness illustration site) ═══
+
+  'seated-spinal-twist': 'https://www.spotebi.com/wp-content/gif-timer/resources/gifs/seated-spinal-twist.gif',
+
+  // ═══ No match found (3 exercises) — text + YouTube link only ═══
+  // deep-neck-flexor (chin tucks), thoracic-extension (foam roller), foam-roll-thoracic
 };
