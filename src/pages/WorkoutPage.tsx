@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { getWorkoutSteps, workouts } from '../data/workouts';
 import { useTimer } from '../hooks/useTimer';
@@ -22,7 +22,6 @@ export default function WorkoutPage() {
   const steps = getWorkoutSteps(workoutId ?? '');
   const workout = workouts.find(w => w.id === workoutId);
 
-  // Check for resume from active session
   const resumeState = location.state as { resume?: boolean } | null;
   const existingSession = resumeState?.resume ? loadActiveSession() : null;
 
@@ -36,6 +35,39 @@ export default function WorkoutPage() {
   const [skippedIds, setSkippedIds] = useState<string[]>(existingSession?.skippedExerciseIds ?? []);
   const [slideDirection, setSlideDirection] = useState<'forward' | 'back'>('forward');
   const [startTime] = useState(() => Date.now());
+
+  // Swipe detection
+  const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+  }, []);
+
+  const handleTouchEnd = useCallback((e: React.TouchEvent) => {
+    if (touchStartX.current === null || touchStartY.current === null) return;
+    const deltaX = e.changedTouches[0].clientX - touchStartX.current;
+    const deltaY = e.changedTouches[0].clientY - touchStartY.current;
+    touchStartX.current = null;
+    touchStartY.current = null;
+
+    // Only horizontal swipes (more horizontal than vertical, min 60px)
+    if (Math.abs(deltaX) > 60 && Math.abs(deltaX) > Math.abs(deltaY) * 1.5) {
+      if (deltaX < 0 && stepIndex < steps.length - 1) {
+        // Swipe left → next exercise (skip without counting)
+        setSlideDirection('forward');
+        setStepIndex(prev => prev + 1);
+        setCurrentSet(1);
+      } else if (deltaX > 0 && stepIndex > 0) {
+        // Swipe right → previous exercise
+        setSlideDirection('back');
+        setStepIndex(prev => prev - 1);
+        setCurrentSet(1);
+      }
+    }
+  }, [stepIndex, steps.length]);
 
   // Wake lock
   useEffect(() => {
@@ -145,22 +177,26 @@ export default function WorkoutPage() {
   const totalSets = currentStep.exercise.sets ?? 1;
 
   return (
-    <div className="flex flex-col min-h-dvh">
+    <div
+      className="flex flex-col h-dvh overflow-hidden"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+      ref={contentRef}
+    >
       {/* Top bar */}
-      <div className="sticky top-0 z-40 bg-bg/80 backdrop-blur-md border-b border-white/5">
-        <div className="max-w-lg mx-auto flex items-center justify-between px-4 py-3">
+      <div className="shrink-0 bg-bg border-b border-white/5">
+        <div className="max-w-lg mx-auto flex items-center justify-between px-4 py-2">
           <button
             onClick={() => setShowExitConfirm(true)}
-            className="flex items-center gap-1 text-text-muted hover:text-text transition-colors text-sm min-h-[48px]"
+            className="flex items-center gap-1 text-text-muted hover:text-text transition-colors text-sm min-h-[44px]"
           >
             <span>&larr;</span> Exit
           </button>
-          <span className="font-display font-bold text-sm truncate max-w-[180px]">{workout.name}</span>
+          <span className="font-display font-semibold text-sm truncate max-w-[180px]">{workout.name}</span>
           <span className="text-text-muted text-sm tabular-nums">
             {stepIndex + 1}/{steps.length}
           </span>
         </div>
-        {/* Progress bar */}
         <div className="h-0.5 bg-white/5">
           <div
             className="h-full bg-primary transition-all duration-500 ease-out"
@@ -169,37 +205,46 @@ export default function WorkoutPage() {
         </div>
       </div>
 
-      {/* Exercise content */}
-      <div className="flex-1 max-w-lg mx-auto w-full px-4 py-6">
+      {/* Exercise content — fills remaining space, no scroll */}
+      <div className="flex-1 min-h-0 max-w-lg mx-auto w-full px-4 flex flex-col">
         <div
           key={stepIndex}
-          className={slideDirection === 'forward' ? 'animate-slide-in' : 'animate-slide-in-reverse'}
+          className={`flex-1 min-h-0 flex flex-col justify-between py-3 ${
+            slideDirection === 'forward' ? 'animate-slide-in' : 'animate-slide-in-reverse'
+          }`}
         >
-          <ExerciseView exercise={currentStep.exercise} phase={currentStep.phase} />
+          {/* Top: exercise info */}
+          <div className="shrink-0">
+            <ExerciseView exercise={currentStep.exercise} phase={currentStep.phase} compact />
+          </div>
 
-          {currentStep.exercise.type === 'timed' ? (
-            <TimedExercise
-              exercise={currentStep.exercise}
-              currentSet={currentSet}
-              totalSets={totalSets}
-              onSetComplete={handleSetComplete}
-              onAudioUnlock={() => {}}
-            />
-          ) : (
-            <RepExercise
-              exercise={currentStep.exercise}
-              currentSet={currentSet}
-              totalSets={totalSets}
-              onSetComplete={handleSetComplete}
-            />
-          )}
-        </div>
+          {/* Middle: timer or rep action */}
+          <div className="flex-1 min-h-0 flex flex-col items-center justify-center py-2">
+            {currentStep.exercise.type === 'timed' ? (
+              <TimedExercise
+                exercise={currentStep.exercise}
+                currentSet={currentSet}
+                totalSets={totalSets}
+                onSetComplete={handleSetComplete}
+                onAudioUnlock={() => {}}
+              />
+            ) : (
+              <RepExercise
+                exercise={currentStep.exercise}
+                currentSet={currentSet}
+                totalSets={totalSets}
+                onSetComplete={handleSetComplete}
+              />
+            )}
+          </div>
 
-        {/* Skip exercise button */}
-        <div className="flex justify-center pt-6 pb-4">
-          <Button variant="ghost" size="sm" onClick={() => setShowSkipConfirm(true)}>
-            Skip Exercise
-          </Button>
+          {/* Bottom: skip + swipe hint */}
+          <div className="shrink-0 flex flex-col items-center gap-1 pb-1">
+            <Button variant="ghost" size="sm" onClick={() => setShowSkipConfirm(true)}>
+              Skip Exercise
+            </Button>
+            <span className="text-[10px] text-text-muted/40">swipe left/right to browse</span>
+          </div>
         </div>
       </div>
 
@@ -216,7 +261,7 @@ export default function WorkoutPage() {
       <ConfirmDialog
         open={showSkipConfirm}
         title="Skip Exercise?"
-        message={`Skip ${currentStep.exercise.name}? You can always come back to it later.`}
+        message={`Skip ${currentStep.exercise.name}?`}
         confirmLabel="Skip"
         cancelLabel="Keep Going"
         variant="default"
@@ -227,7 +272,7 @@ export default function WorkoutPage() {
       <ConfirmDialog
         open={showExitConfirm}
         title="Exit Workout?"
-        message="Your progress will be saved. You can resume this workout later."
+        message="Progress will be saved. You can resume later."
         confirmLabel="Exit"
         cancelLabel="Stay"
         variant="danger"
