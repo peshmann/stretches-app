@@ -205,21 +205,21 @@ export default function WorkoutPage() {
         </div>
       </div>
 
-      {/* Exercise content — fills remaining space, no scroll */}
+      {/* Exercise content */}
       <div className="flex-1 min-h-0 max-w-lg mx-auto w-full px-4 flex flex-col">
         <div
           key={stepIndex}
-          className={`flex-1 min-h-0 flex flex-col justify-between py-3 ${
+          className={`flex-1 min-h-0 flex flex-col ${
             slideDirection === 'forward' ? 'animate-slide-in' : 'animate-slide-in-reverse'
           }`}
         >
-          {/* Top: exercise info + GIF + description */}
-          <div className="shrink-0">
-            <ExerciseView exercise={currentStep.exercise} phase={currentStep.phase} compact />
+          {/* Exercise info — scrollable if content is long */}
+          <div className="flex-1 min-h-0 overflow-y-auto py-3">
+            <ExerciseView exercise={currentStep.exercise} phase={currentStep.phase} />
           </div>
 
-          {/* Middle: timer or rep action */}
-          <div className="flex-1 min-h-0 flex flex-col items-center justify-center">
+          {/* Timer/action — always visible at bottom */}
+          <div className="shrink-0 py-3 border-t border-white/5 flex flex-col items-center gap-2">
             {currentStep.exercise.type === 'timed' ? (
               <TimedExercise
                 exercise={currentStep.exercise}
@@ -236,14 +236,12 @@ export default function WorkoutPage() {
                 onSetComplete={handleSetComplete}
               />
             )}
-          </div>
-
-          {/* Bottom: skip + swipe hint */}
-          <div className="shrink-0 flex flex-col items-center gap-1 pb-1">
-            <Button variant="ghost" size="sm" onClick={() => setShowSkipConfirm(true)}>
-              Skip Exercise
-            </Button>
-            <span className="text-[10px] text-text-muted/40">swipe left/right to browse</span>
+            <div className="flex items-center gap-3">
+              <Button variant="ghost" size="sm" onClick={() => setShowSkipConfirm(true)}>
+                Skip
+              </Button>
+              <span className="text-[10px] text-text-muted/30">swipe ← → to browse</span>
+            </div>
           </div>
         </div>
       </div>

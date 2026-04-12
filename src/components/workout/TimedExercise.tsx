@@ -87,9 +87,9 @@ export function TimedExercise({ exercise, currentSet, totalSets, onSetComplete, 
     : null;
 
   return (
-    <div className="flex flex-col items-center gap-3">
+    <div className="flex flex-col items-center gap-2">
       {totalSets > 1 && (
-        <span className="font-display text-sm text-text-muted">
+        <span className="text-xs text-text-muted">
           Set {currentSet} of {totalSets}
         </span>
       )}
@@ -101,29 +101,29 @@ export function TimedExercise({ exercise, currentSet, totalSets, onSetComplete, 
       )}
 
       {timerState === 'switching' ? (
-        <div className="flex flex-col items-center gap-3">
-          <ProgressRing progress={1} size={120} strokeWidth={6} color="stroke-primary" trackColor="stroke-white/10">
+        <div className="flex flex-col items-center gap-2">
+          <ProgressRing progress={1} size={100} strokeWidth={5} color="stroke-primary" trackColor="stroke-white/10">
             <span className="font-display text-sm font-bold text-primary">Switch</span>
           </ProgressRing>
-          <p className="font-display text-lg font-bold text-primary animate-pulse">
+          <p className="font-display text-base font-bold text-primary animate-pulse">
             Switch to Right Side
           </p>
         </div>
       ) : (
-        <>
+        <div className="flex items-center gap-4">
           <ProgressRing
             progress={timerState === 'idle' ? 0 : timer.progress}
-            size={120}
-            strokeWidth={6}
+            size={100}
+            strokeWidth={5}
             color="stroke-primary"
             trackColor="stroke-white/10"
           >
             <div className="flex flex-col items-center">
-              <span className="font-display text-3xl font-bold tabular-nums">
+              <span className="font-display text-2xl font-bold tabular-nums">
                 {timerState === 'idle' ? formatTime(duration) : formatTime(timer.secondsLeft)}
               </span>
               {timerState === 'paused' && (
-                <span className="text-[10px] uppercase tracking-wider text-text-muted">Paused</span>
+                <span className="text-[9px] uppercase text-text-muted">Paused</span>
               )}
             </div>
           </ProgressRing>
@@ -145,7 +145,7 @@ export function TimedExercise({ exercise, currentSet, totalSets, onSetComplete, 
               Resume
             </Button>
           )}
-        </>
+        </div>
       )}
     </div>
   );

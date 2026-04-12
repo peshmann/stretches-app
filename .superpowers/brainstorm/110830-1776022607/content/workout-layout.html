@@ -1,0 +1,100 @@
+<h2>Workout Exercise Screen — Layout Options</h2>
+<p class="subtitle">Goal: Show exercise name, description, tip, GIF, AND timer — all visible without scrolling. Swipeable left/right.</p>
+
+<div class="cards">
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding:16px;background:#0a0e17;border-radius:8px;font-family:system-ui;color:#e8ecf4">
+      <!-- Mockup of Option A -->
+      <div style="border-bottom:1px solid #ffffff10;padding:6px 0;display:flex;justify-content:space-between;font-size:11px;color:#9ca3af">
+        <span>← Exit</span>
+        <span style="font-weight:bold;color:#e8ecf4">Session A</span>
+        <span>3/12</span>
+      </div>
+      <div style="height:2px;background:#ffffff10;margin-bottom:12px"><div style="height:100%;width:25%;background:#3b82f6"></div></div>
+
+      <!-- Exercise info row -->
+      <div style="display:flex;gap:10px;margin-bottom:10px">
+        <div style="width:70px;height:70px;background:#1f2937;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+          <span style="font-size:9px;color:#9ca3af">GIF</span>
+        </div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:9px;color:#9ca3af;text-transform:uppercase;letter-spacing:1px">MAIN WORKOUT</div>
+          <div style="font-size:14px;font-weight:bold;margin:2px 0">Cable Face Pulls</div>
+          <div style="font-size:10px;color:#9ca3af;line-height:1.3">Pull rope toward face, split hands apart. Squeeze shoulder blades.</div>
+          <div style="font-size:9px;color:#60a5fa;margin-top:3px">Tip: Key for rounded shoulders</div>
+        </div>
+      </div>
+
+      <!-- Timer area -->
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 0">
+        <div style="font-size:10px;color:#9ca3af">Set 2 of 4</div>
+        <div style="width:100px;height:100px;border-radius:50%;border:4px solid #3b82f6;display:flex;align-items:center;justify-content:center">
+          <span style="font-size:24px;font-weight:bold">0:45</span>
+        </div>
+        <div style="background:#3b82f6;color:white;padding:8px 24px;border-radius:10px;font-size:12px;font-weight:600">Start Timer</div>
+      </div>
+
+      <div style="text-align:center;font-size:10px;color:#9ca3af40;padding-top:4px">swipe ← → to browse</div>
+    </div>
+    <div class="card-body">
+      <h3>A: Compact row (GIF left, text right)</h3>
+      <p>GIF thumbnail 70px on left, text flows on right. Timer centered below. Everything visible, no cut-off. Description wraps naturally.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding:16px;background:#0a0e17;border-radius:8px;font-family:system-ui;color:#e8ecf4">
+      <!-- Mockup of Option B -->
+      <div style="border-bottom:1px solid #ffffff10;padding:6px 0;display:flex;justify-content:space-between;font-size:11px;color:#9ca3af">
+        <span>← Exit</span>
+        <span style="font-weight:bold;color:#e8ecf4">Session A</span>
+        <span>3/12</span>
+      </div>
+      <div style="height:2px;background:#ffffff10;margin-bottom:12px"><div style="height:100%;width:25%;background:#3b82f6"></div></div>
+
+      <!-- Exercise name + phase -->
+      <div style="text-align:center;margin-bottom:8px">
+        <div style="font-size:9px;color:#9ca3af;text-transform:uppercase;letter-spacing:1px">MAIN WORKOUT</div>
+        <div style="font-size:16px;font-weight:bold;margin:2px 0">Cable Face Pulls</div>
+      </div>
+
+      <!-- GIF centered, wider -->
+      <div style="width:100%;height:100px;background:#1f2937;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:8px">
+        <span style="font-size:10px;color:#9ca3af">GIF (full width, short height)</span>
+      </div>
+
+      <!-- Description below GIF -->
+      <div style="font-size:10px;color:#9ca3af;line-height:1.4;text-align:center;margin-bottom:4px">
+        Pull rope toward face, split hands apart. Squeeze shoulder blades together at the end.
+      </div>
+      <div style="font-size:9px;color:#60a5fa;text-align:center;margin-bottom:10px">Tip: HIGH PRIORITY — Strengthens weak rhomboids</div>
+
+      <!-- Timer + button inline -->
+      <div style="display:flex;align-items:center;justify-content:center;gap:16px;padding:10px 0">
+        <div style="width:80px;height:80px;border-radius:50%;border:4px solid #3b82f6;display:flex;flex-direction:column;align-items:center;justify-content:center">
+          <span style="font-size:20px;font-weight:bold">0:45</span>
+          <span style="font-size:8px;color:#9ca3af">Set 2/4</span>
+        </div>
+        <div style="background:#3b82f6;color:white;padding:10px 20px;border-radius:10px;font-size:12px;font-weight:600">Start Timer</div>
+      </div>
+
+      <div style="text-align:center;font-size:10px;color:#9ca3af40;padding-top:4px">swipe ← → to browse</div>
+    </div>
+    <div class="card-body">
+      <h3>B: Centered stack (GIF wide, text below)</h3>
+      <p>Exercise name at top, full-width GIF (short height), description centered below, timer + button on same row. More breathing room.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:24px;">
+  <h3>Key principles (both options)</h3>
+  <ul>
+    <li>No scroll — everything fits in mobile viewport</li>
+    <li>Full description visible (not truncated/cut off)</li>
+    <li>Tip always shown</li>
+    <li>Swipe left/right to browse exercises</li>
+    <li>Skip button at bottom (small text link)</li>
+    <li>Timer is present but NOT dominating (80-100px ring, not 200px)</li>
+  </ul>
+</div>
