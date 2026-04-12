@@ -44,11 +44,12 @@ export const exerciseGifs: Record<string, string> = {
   'foam-roll-hip-flexors': 'https://i.makeagif.com/media/8-20-2015/H3b1Kr.gif',
   'foam-roll-lats': 'https://static.exercisedb.dev/media/c3Pfhti.gif',
 
-  // ═══ No match found (8 exercises) — text + YouTube link only ═══
-  // kneeling-hip-flexor, hip-flexor-priority
-  // seated-spinal-twist
-  // band-pull-aparts
-  // deep-neck-flexor
-  // thoracic-extension
-  // foam-roll-thoracic
+  // ═══ User-picked final round ═══
+
+  'kneeling-hip-flexor': 'https://i.makeagif.com/media/6-03-2014/xjfID0.gif',
+  'hip-flexor-priority': 'https://i.makeagif.com/media/6-03-2014/xjfID0.gif',
+  'band-pull-aparts': 'https://i.makeagif.com/media/2-26-2018/mAf82b.gif',
+
+  // ═══ No match found (4 exercises) — text + YouTube link only ═══
+  // seated-spinal-twist, deep-neck-flexor, thoracic-extension, foam-roll-thoracic
 };
