@@ -37,12 +37,18 @@ export const exerciseGifs: Record<string, string> = {
   'childs-pose': 'https://i.makeagif.com/media/5-29-2014/GLydU_.gif',
   'childs-pose-priority': 'https://i.makeagif.com/media/5-29-2014/GLydU_.gif',
 
-  // ═══ No match found — these exercises show text + YouTube link only ═══
-  // doorway-chest-stretch, doorway-chest-priority
-  // kneeling-hip-flexor, hip-flexor-priority, foam-roll-hip-flexors
+  // ═══ User-picked round 2 ═══
+
+  'doorway-chest-stretch': 'https://i.makeagif.com/media/5-04-2025/IuVHwU.gif',
+  'doorway-chest-priority': 'https://i.makeagif.com/media/5-04-2025/IuVHwU.gif',
+  'foam-roll-hip-flexors': 'https://i.makeagif.com/media/8-20-2015/H3b1Kr.gif',
+  'foam-roll-lats': 'https://static.exercisedb.dev/media/c3Pfhti.gif',
+
+  // ═══ No match found (8 exercises) — text + YouTube link only ═══
+  // kneeling-hip-flexor, hip-flexor-priority
   // seated-spinal-twist
   // band-pull-aparts
   // deep-neck-flexor
   // thoracic-extension
-  // foam-roll-thoracic, foam-roll-lats
+  // foam-roll-thoracic
 };
