@@ -1,50 +1,65 @@
-// Exercise GIF demonstrations from Tenor
-// Good matches are sourced automatically. Exercises without a good match are omitted.
-// To add missing GIFs: find a good exercise demo GIF URL and add the entry below.
+// Exercise GIF demonstrations — curated from ExerciseDB (static.exercisedb.dev) and Tenor
+// ExerciseDB GIFs are proper exercise demos under MIT license, publicly accessible
+// Tenor GIFs are used only where ExerciseDB doesn't have coverage
 
 export const exerciseGifs: Record<string, string> = {
-  // --- GOOD MATCHES (auto-sourced, verified) ---
-  'cat-cow': 'https://media.tenor.com/2mXGYuCO7ugAAAAC/workout-working-out.gif',
-  'cat-cow-stretch': 'https://media.tenor.com/2mXGYuCO7ugAAAAC/workout-working-out.gif',
-  'clamshells': 'https://media.tenor.com/6I8f5HYyIq0AAAAC/clam-exercise.gif',
-  'light-cardio-a': 'https://media.tenor.com/2Q0220t1PnoAAAAC/crossfit-rowing.gif',
-  'light-cardio-b': 'https://media.tenor.com/2Q0220t1PnoAAAAC/crossfit-rowing.gif',
-  'dead-bug': 'https://media.tenor.com/DN23029huGsAAAAC/deadbug-core.gif',
+  // ═══ ExerciseDB — accurate exercise demonstrations ═══
+
+  // Core
+  'dead-bug': 'https://static.exercisedb.dev/media/iny3m5y.gif',
+  'plank': 'https://static.exercisedb.dev/media/VBAWRPG.gif',
+  'side-plank': 'https://static.exercisedb.dev/media/5VXmnV5.gif',
+  'pallof-press': 'https://static.exercisedb.dev/media/9pa4H5m.gif',
+
+  // Back
+  'cable-rows': 'https://static.exercisedb.dev/media/hvV79Si.gif',
+  'lat-pulldown': 'https://static.exercisedb.dev/media/LEprlgG.gif',
+
+  // Legs & Glutes
+  'glute-bridge': 'https://static.exercisedb.dev/media/qKBpF7I.gif',
+  'glute-bridge-activation': 'https://static.exercisedb.dev/media/qKBpF7I.gif',
+  'goblet-squat': 'https://static.exercisedb.dev/media/yn8yg1r.gif',
+
+  // Stretches (ExerciseDB)
+  'doorway-chest-stretch': 'https://static.exercisedb.dev/media/3uj0Ozg.gif',
+  'doorway-chest-priority': 'https://static.exercisedb.dev/media/3uj0Ozg.gif',
+  'kneeling-hip-flexor': 'https://static.exercisedb.dev/media/tFGKm99.gif',
+  'hip-flexor-priority': 'https://static.exercisedb.dev/media/tFGKm99.gif',
+  'foam-roll-hip-flexors': 'https://static.exercisedb.dev/media/tFGKm99.gif',
+  'neck-stretches': 'https://static.exercisedb.dev/media/oQRJYkC.gif',
+  'figure-4-stretch': 'https://static.exercisedb.dev/media/QY39eBr.gif',
+  'hamstring-stretch': 'https://static.exercisedb.dev/media/99rWm7w.gif',
+  'lat-stretch': 'https://static.exercisedb.dev/media/f38OEuO.gif',
+  'seated-spinal-twist': 'https://static.exercisedb.dev/media/UEjSrKI.gif',
+
+  // Cardio
+  'light-cardio-a': 'https://static.exercisedb.dev/media/rjiM4L3.gif',
+  'light-cardio-b': 'https://static.exercisedb.dev/media/rjiM4L3.gif',
+
+  // ═══ Tenor — used where ExerciseDB lacks coverage ═══
+
   'cable-face-pulls': 'https://media.tenor.com/FGsBtkQCchwAAAAC/face-pull.gif',
-  'cable-rows': 'https://media.tenor.com/2NYcfHsikFcAAAAC/seated-row.gif',
-  'glute-bridge': 'https://media.tenor.com/KWB1fvFlzjgAAAAC/barbell-glute.gif',
-  'glute-bridge-activation': 'https://media.tenor.com/WAhbRzWse3wAAAAC/gym.gif',
-  'goblet-squat': 'https://media.tenor.com/ovqOi2o9B08AAAAC/squat-goblet-squat.gif',
-  'plank': 'https://media.tenor.com/Y8ck0rP4WiMAAAAC/pewithjoe-plank.gif',
-  'foam-roll-quads': 'https://media.tenor.com/ZBJ8wxSo4Q4AAAAC/borna-coric-foam-roller.gif',
-  'bird-dog': 'https://media.tenor.com/QnFul8wwUAwAAAAC/lombar-motsk-lombar.gif',
-  'lat-pulldown': 'https://media.tenor.com/vLArQfGejXEAAAAC/pulldown-exercise-jamie-zhu.gif',
-  'reverse-lunges': 'https://media.tenor.com/fWiC9Ze5eUMAAAAC/lunges-exercise.gif',
   'single-leg-glute-bridge': 'https://media.tenor.com/6e9R6ktpmjQAAAAC/single-leg-butt-bridge.gif',
   'childs-pose': 'https://media.tenor.com/aSrCPRHv8aEAAAAC/childs-pose-yoga-pose.gif',
   'childs-pose-priority': 'https://media.tenor.com/aSrCPRHv8aEAAAAC/childs-pose-yoga-pose.gif',
-  'seated-spinal-twist': 'https://media.tenor.com/baBLPlkxMU4AAAAC/stretch-stretching.gif',
-  'figure-4-stretch': 'https://media.tenor.com/staDn60dmtYAAAAC/stretching-warm-up.gif',
-  'lat-stretch': 'https://media.tenor.com/FiZeFtVl7TYAAAAC/side-stretch-side-bend.gif',
-  'wall-angels': 'https://media.tenor.com/t1f260YWlIsAAAAC/gifsraoul-workout.gif',
+  'reverse-lunges': 'https://media.tenor.com/fWiC9Ze5eUMAAAAC/lunges-exercise.gif',
+  'clamshells': 'https://media.tenor.com/6I8f5HYyIq0AAAAC/clam-exercise.gif',
 
-  // --- IMPROVED MATCHES (manually picked from refined searches) ---
-  'kneeling-hip-flexor': 'https://media.tenor.com/7AiXqxQT0dsAAAAC/lunging-leg-lunge.gif',
-  'hip-flexor-priority': 'https://media.tenor.com/7AiXqxQT0dsAAAAC/lunging-leg-lunge.gif',
-  'neck-stretches': 'https://media.tenor.com/wpQ1C-E09q0AAAAC/head-drop-neck-exercise.gif',
-  'hamstring-stretch': 'https://media.tenor.com/tclORraR32UAAAAC/hand-to-toe-extended-stretch.gif',
-  'foam-roll-lats': 'https://media.tenor.com/1UcstMh5uAUAAAAC/warming-up-stretching.gif',
-  'side-plank': 'https://media.tenor.com/ohdQMV-9SrkAAAAC/pamela-pamela-reif.gif',
-  'foam-roll-thoracic': 'https://media.tenor.com/1UcstMh5uAUAAAAC/warming-up-stretching.gif',
-  'thread-the-needle': 'https://media.tenor.com/G6UOVsD9bs4AAAAC/workout-working-out.gif',
-  'thread-the-needle-priority': 'https://media.tenor.com/G6UOVsD9bs4AAAAC/workout-working-out.gif',
-  'band-pull-aparts': 'https://media.tenor.com/IrYw1RzccdoAAAAC/resistance-bands-workout.gif',
-  'deep-neck-flexor': 'https://media.tenor.com/BDuua5AFAh8AAAAC/head-strong-neck-ups.gif',
-  'thoracic-extension': 'https://media.tenor.com/FdSmFsLOItMAAAAC/back-extension-exercise.gif',
-
-  // --- MISSING: No good GIF match found (4 exercises). User can source manually. ---
-  // 'foam-roll-hip-flexors': '',   // Foam Roll - Hip Flexors (too niche for Tenor)
-  // 'doorway-chest-stretch': '',   // Doorway Chest Stretch (too specific)
-  // 'doorway-chest-priority': '',  // Doorway Chest Stretch (daily)
-  // 'pallof-press': '',            // Cable Pallof Press (too niche)
+  // ═══ MISSING — no reliable GIF match found ═══
+  // These exercises are too niche for free GIF databases.
+  // The app shows text description + YouTube link instead.
+  // To add: find a GIF URL showing the exercise and add it here.
+  //
+  // 'foam-roll-thoracic'         — Foam Roll Thoracic Spine
+  // 'foam-roll-lats'             — Foam Roll Lats
+  // 'foam-roll-quads'            — Foam Roll Quads
+  // 'cat-cow'                    — Cat-Cow Stretch
+  // 'cat-cow-stretch'            — Cat-Cow Stretch (daily)
+  // 'deep-neck-flexor'           — Chin Tuck / Deep Neck Flexor
+  // 'thoracic-extension'         — Thoracic Extension on Foam Roller
+  // 'wall-angels'                — Wall Angels
+  // 'bird-dog'                   — Bird Dog
+  // 'band-pull-aparts'           — Resistance Band Pull-Aparts
+  // 'thread-the-needle'          — Thread the Needle stretch
+  // 'thread-the-needle-priority' — Thread the Needle (daily)
 };
